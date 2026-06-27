@@ -596,6 +596,18 @@ body {
 }
 .btn-clear:hover { color: #ef4444; }
 
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.github-link:hover { color: #1e293b; }
+
 .count-label {
   font-size: 11px;
   color: #94a3b8;
