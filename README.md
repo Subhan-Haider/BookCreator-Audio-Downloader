@@ -52,3 +52,13 @@ Audio download/
 ├── popup.css           ← Light theme styling
 └── icons/              ← Extension icons
 ```
+
+---
+
+## 📬 Support
+
+Have a question, bug report, or feature request?
+
+- **Email:** [support@subhan.tech](mailto:support@subhan.tech)
+- **GitHub:** [github.com/Subhan-Haider](https://github.com/Subhan-Haider)
+- **Privacy Policy:** [subhan.tech/privacy](https://subhan.tech/privacy)

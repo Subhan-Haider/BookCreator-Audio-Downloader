@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - BookCreator Audio Downloader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon16.png">
+    <link rel="shortcut icon" href="icons/icon48.png">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+        }
+
+        .icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #334155;
+        }
+
+        ul {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: #334155;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            color: #1e3a8a;
+            font-weight: 500;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 12px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .project-card:hover {
+            background: #eff6ff;
+            border-color: #c7d2fe;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.12);
+        }
+
+        .project-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .project-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            color: white;
+        }
+
+        .social-card:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+            text-decoration: none;
+        }
+
+        .social-card.tiktok {
+            background: linear-gradient(135deg, #010101, #333);
+        }
+
+        .social-card.instagram {
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+        }
+
+        .social-card svg {
+            flex-shrink: 0;
+        }
+
+        .donate-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            margin-top: 16px;
+            width: 100%;
+            background: linear-gradient(135deg, #003087, #009cde);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(0, 48, 135, 0.25);
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 48, 135, 0.35);
+            text-decoration: none;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v13m0 0l-4-4m4 4l4-4"></path>
+                    <path d="M3 18v1a2 2 0 002 2h14a2 2 0 002-2v-1"></path>
+                </svg>
+            </div>
+            <h1>Privacy Policy</h1>
+            <div class="last-updated">Last Updated: June 2026</div>
+        </div>
+
+        <div class="highlight-box">
+            <strong>TLDR</strong> — This extension runs entirely on your device. We collect <strong>zero</strong>
+            personal data, never track you, and never send anything to external servers. Your audio and text stay on
+            your computer only.
+        </div>
+
+        <h2>1. Information We Do Not Collect</h2>
+        <p>The <strong>BookCreator Audio Downloader</strong> Chrome Extension operates entirely locally within your
+            browser. We do not collect, transmit, store, or process any of the following:</p>
+        <ul>
+            <li>Personally identifiable information (names, emails, passwords, etc.)</li>
+            <li>Browsing history or analytics outside of the BookCreator application</li>
+            <li>IP addresses or location data</li>
+            <li>Telemetery or usage statistics</li>
+        </ul>
+
+        <h2>2. How the Extension Uses Data</h2>
+        <p>In order to function, the extension interacts with specific "Website Content" (audio streams and text) only
+            when you actively trigger it on <code>app.bookcreator.com</code>.</p>
+        <ul>
+            <li><strong>Audio URLs:</strong> The extension temporarily intercepts Firebase Storage URLs to allow you to
+                download the audio to your local device.</li>
+            <li><strong>Text Extraction:</strong> The extension reads the visible text on the page to generate a
+                downloadable text transcript.</li>
+        </ul>
+        <p>All of this processing happens strictly in your browser's local memory (RAM). Once the browser is closed or
+            the tab is refreshed, this temporary data is destroyed. <strong>No data is ever sent to external servers or
+                third parties.</strong></p>
+
+        <h2>3. Third-Party Services</h2>
+        <p>The extension interacts directly with Google's Firebase Storage (which hosts BookCreator's audio). When you
+            download an audio file, your browser requests the file directly from Google's servers. The extension itself
+            does not route your traffic through any intermediate servers or proxies.</p>
+
+        <h2>4. Permissions Justification</h2>
+        <p>The extension requires specific permissions to function. Here is why we need them:</p>
+        <ul>
+            <li><strong>activeTab & tabs:</strong> Used to inject the automation scripts into your active BookCreator
+                tab.</li>
+            <li><strong>webRequest:</strong> Used strictly to intercept the audio URLs from BookCreator so they can be
+                downloaded.</li>
+            <li><strong>downloads:</strong> Required to save the final WAV or text files directly to your hard drive.
+            </li>
+        </ul>
+
+        <h2>5. Contact</h2>
+        <p>If you have any questions or concerns about this privacy policy, or if you would like to inspect the
+            open-source code for this extension, please reach out via email at <a
+                href="mailto:support@subhan.tech">support@subhan.tech</a> or visit the <a
+                href="https://github.com/Subhan-Haider/BookCreator-Audio-Downloader" target="_blank">GitHub
+                Repository</a>.</p>
+
+        <h2>6. My Other Projects</h2>
+        <div class="projects-grid">
+            <a href="https://subhan.tech" target="_blank" class="project-card">
+                <div class="project-icon">🌐</div>
+                <div class="project-name">subhan.tech</div>
+            </a>
+            <a href="https://adshield-vpn.subhan.tech" target="_blank" class="project-card">
+                <div class="project-icon">🛡️</div>
+                <div class="project-name">AdShield VPN</div>
+            </a>
+            <a href="https://security.subhan.tech" target="_blank" class="project-card">
+                <div class="project-icon">🔒</div>
+                <div class="project-name">Security</div>
+            </a>
+            <a href="https://emoji.subhan.tech" target="_blank" class="project-card">
+                <div class="project-icon">😀</div>
+                <div class="project-name">Emoji Tools</div>
+            </a>
+            <a href="https://lootops.me" target="_blank" class="project-card">
+                <div class="project-icon">🎮</div>
+                <div class="project-name">LootOps</div>
+            </a>
+            <a href="https://app.lootops.me" target="_blank" class="project-card">
+                <div class="project-icon">🕹️</div>
+                <div class="project-name">LootOps App</div>
+            </a>
+            <a href="https://lootops.website" target="_blank" class="project-card">
+                <div class="project-icon">🌍</div>
+                <div class="project-name">LootOps.website</div>
+            </a>
+            <a href="https://codelens.site" target="_blank" class="project-card">
+                <div class="project-icon">🔍</div>
+                <div class="project-name">CodeLens</div>
+            </a>
+            <a href="https://blizflow.online" target="_blank" class="project-card">
+                <div class="project-icon">⚡</div>
+                <div class="project-name">BlizFlow</div>
+            </a>
+            <a href="https://codiner.online" target="_blank" class="project-card">
+                <div class="project-icon">💻</div>
+                <div class="project-name">Codiner</div>
+            </a>
+        </div>
+
+        <h2>7. Follow Me</h2>
+        <div class="social-row">
+            <a href="https://tiktok.com/@s.subhan.haider" target="_blank" class="social-card tiktok">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path
+                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.73a8.16 8.16 0 004.77 1.52V6.8a4.85 4.85 0 01-1-.11z" />
+                </svg>
+                @s.subhan.haider
+            </a>
+            <a href="https://www.instagram.com/subhan_haid" target="_blank" class="social-card instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="2"
+                        fill="none" />
+                    <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2" fill="none" />
+                    <circle cx="17.5" cy="6.5" r="1.5" fill="white" />
+                </svg>
+                @subhan_haid
+            </a>
+        </div>
+
+        <h2>8. Support My Work</h2>
+        <p style="color:#64748b; font-size:14px;">If this extension saved you time, consider buying me a coffee ☕</p>
+        <a href="https://www.paypal.com/paypalme/Subhanhaide" target="_blank" class="donate-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"
+                    fill="white" />
+            </svg>
+            Donate via PayPal — paypal.me/Subhanhaide
+        </a>
+
+        <div class="footer">
+            &copy; 2026 Subhan-Haider. Open Source Software.
+        </div>
+    </div>
+
+</body>
+
+</html>
