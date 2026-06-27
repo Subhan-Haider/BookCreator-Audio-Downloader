@@ -25,6 +25,7 @@ const scanProgBar   = document.getElementById('scanProgBar');
 const scanPageList  = document.getElementById('scanPageList');
 
 let audioEntries  = [];
+let pageTexts     = {};   // page# → extracted text string
 let isScanning    = false;
 let currentTab    = null;
 let pageDots      = {};   // page# → dot element
@@ -76,6 +77,7 @@ async function startAutoScan(tab) {
 
   // Reset UI
   pageDots   = {};
+  pageTexts  = {};
   totalPages = 0;
   scanPageList.innerHTML = '';
   scanChip.textContent   = `${audioEntries.length} clips`;
@@ -126,9 +128,13 @@ function stopAutoScan() {
 function handleScanProgress(msg) {
   if (!isScanning && msg.status !== 'done') return;
 
-  const { status, page, pages, captured } = msg;
+  const { status, page, pages, captured, text } = msg;
   if (captured != null) {
     scanChip.textContent = `${captured} clip${captured !== 1 ? 's' : ''}`;
+  }
+  
+  if (text && page) {
+    pageTexts[page] = text;
   }
 
   switch (status) {
@@ -194,6 +200,12 @@ function handleScanProgress(msg) {
 
       // Reload audio list
       if (currentTab) loadAudioList(currentTab.id);
+      
+      // Show text download button if we captured any text
+      const hasText = Object.values(pageTexts).some(t => t.trim().length > 0);
+      if (hasText) {
+        document.getElementById('dlTextBtn').style.display = 'flex';
+      }
       break;
     }
   }
@@ -356,10 +368,36 @@ async function triggerDomScan(tab) {
 function clearList(tabId) {
   chrome.runtime.sendMessage({ action: 'clearList', tabId }, () => {
     audioEntries = [];
+    pageTexts = {};
+    document.getElementById('dlTextBtn').style.display = 'none';
     renderList();
     scanChip.textContent = '0 clips';
   });
 }
+
+// ── DOWNLOAD TEXT ─────────────────────────────────────────────────────────────
+document.getElementById('dlTextBtn').addEventListener('click', () => {
+  const pages = Object.keys(pageTexts).map(Number).sort((a, b) => a - b);
+  if (pages.length === 0) return;
+  
+  let combinedText = `BookCreator Export - ${formatDate()}\n\n`;
+  for (const p of pages) {
+    if (pageTexts[p] && pageTexts[p].trim()) {
+      combinedText += `--- Page ${p} ---\n${pageTexts[p]}\n\n`;
+    }
+  }
+  
+  const blob = new Blob([combinedText], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  
+  chrome.downloads.download({
+    url: url,
+    filename: `bookcreator-text-${formatDate()}.txt`,
+    saveAs: false
+  }, () => {
+    URL.revokeObjectURL(url);
+  });
+});
 
 // ── COMBINE ALL CLIPS ─────────────────────────────────────────────────────────
 combineBtn.addEventListener('click', combineAllClips);

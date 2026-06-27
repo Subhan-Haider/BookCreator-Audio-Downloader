@@ -333,7 +333,13 @@ body {
   font-weight: 500;
 }
 
+.combine-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .btn-combine {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -356,6 +362,24 @@ body {
   box-shadow: 0 6px 18px rgba(99,102,241,0.4);
 }
 .btn-combine:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 9px 12px;
+  background: white;
+  color: #6366f1;
+  border: 1.5px solid #c7d2fe;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-text:hover { background: #f8fafc; border-color: #a5b4fc; }
 
 /* Progress bar */
 .progress-wrap {

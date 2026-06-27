@@ -18,6 +18,7 @@ window.addEventListener('message', (event) => {
       status:  event.data.status,
       page:    event.data.page,
       pages:   event.data.pages,
+      text:    event.data.text,
     }).catch(() => {});
   }
 });

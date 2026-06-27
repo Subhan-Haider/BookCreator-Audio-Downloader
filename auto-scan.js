@@ -117,6 +117,43 @@
            el.classList.toString().includes('disabled');
   }
 
+  function extractPageText() {
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          
+          // Skip UI elements
+          if (parent.closest('button, nav, header, .toolbar, [role="button"], [class*="ui" i]')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          
+          // Skip invisible elements
+          const style = window.getComputedStyle(parent);
+          if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+            return NodeFilter.FILTER_REJECT;
+          }
+          
+          if (node.nodeValue.trim().length < 2) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    const texts = [];
+    let node;
+    while (node = walker.nextNode()) {
+      texts.push(node.nodeValue.trim());
+    }
+    
+    return texts.join('\n').replace(/\n{2,}/g, '\n');
+  }
+
   // ── Main loop ───────────────────────────────────────────────────────────────
 
   const MAX_PAGES = 80;
@@ -132,12 +169,14 @@
 
     // Click the audio button if found
     const audioBtn = findAudioButton();
+    const pageText = extractPageText();
+
     if (audioBtn) {
       audioBtn.click();
-      report({ status: 'audio_clicked', page });
+      report({ status: 'audio_clicked', page, text: pageText });
       await sleep(2800); // Wait for network request to be captured
     } else {
-      report({ status: 'no_audio', page });
+      report({ status: 'no_audio', page, text: pageText });
       await sleep(600);
     }
 

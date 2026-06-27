@@ -110,6 +110,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       status:  msg.status,
       page:    msg.page,
       pages:   msg.pages,
+      text:    msg.text,
       captured: count,
     }).catch(() => {});
     
