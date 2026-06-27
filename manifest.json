@@ -12,7 +12,8 @@
     "notifications"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "https://*.bookcreator.com/*",
+    "https://firebasestorage.googleapis.com/*"
   ],
   "background": {
     "service_worker": "background.js"

@@ -25,7 +25,7 @@ chrome.webRequest.onResponseStarted.addListener(
       chrome.runtime.sendMessage({ action: 'newAudioFound', tabId, entry }).catch(() => {});
     }
   },
-  { urls: ['<all_urls>'] },
+  { urls: ['https://*.bookcreator.com/*', 'https://firebasestorage.googleapis.com/*'] },
   ['responseHeaders']
 );
 
@@ -45,7 +45,7 @@ chrome.webRequest.onBeforeRequest.addListener(
       chrome.runtime.sendMessage({ action: 'newAudioFound', tabId, entry }).catch(() => {});
     }
   },
-  { urls: ['<all_urls>'], types: ['media', 'xmlhttprequest', 'other'] }
+  { urls: ['https://*.bookcreator.com/*', 'https://firebasestorage.googleapis.com/*'], types: ['media', 'xmlhttprequest', 'other'] }
 );
 
 // ── Clear captured list when tab navigates ────────────────────────────────────
