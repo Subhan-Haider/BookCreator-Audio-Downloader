@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookCreator Audio Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="popup.css"/>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="url(#hg)"/>
+          <path d="M8 16V8l8 4-8 4z" fill="white"/>
+          <path d="M16 7v10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="hg" x1="2" y1="2" x2="22" y2="22">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Audio Downloader</span>
+      </div>
+      <span class="version">v2</span>
+    </div>
+
+    <!-- Warning: not on BookCreator -->
+    <div class="warning" id="warningBox" style="display:none">
+      ⚠️ Navigate to <strong>app.bookcreator.com</strong> and open this extension.
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         AUTO DOWNLOAD ALL PAGES
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="auto-section">
+      <div class="auto-header">
+        <div class="auto-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" stroke="#6366f1" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          <span>Download All Pages</span>
+        </div>
+        <span class="auto-hint">Auto-clicks audio &amp; navigates each page</span>
+      </div>
+
+      <!-- Scan progress (hidden until scanning) -->
+      <div class="scan-progress" id="scanProgress" style="display:none">
+        <div class="scan-status-row">
+          <div class="scan-dot-lg" id="scanDot"></div>
+          <span id="scanStatusText">Starting…</span>
+          <span class="scan-chip" id="scanChip">0 clips</span>
+        </div>
+        <div class="scan-prog-bar-wrap">
+          <div class="scan-prog-bar" id="scanProgBar" style="width:0%"></div>
+        </div>
+        <div class="scan-page-list" id="scanPageList"></div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="auto-actions" id="autoActions">
+        <button class="btn-auto" id="autoScanBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+          </svg>
+          Start Auto-Download
+        </button>
+        <button class="btn-stop" id="stopScanBtn" style="display:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+          </svg>
+          Stop
+        </button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>or manage captured clips</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         MANUAL / CAPTURED CLIPS
+    ════════════════════════════════════════════════════════════════ -->
+
+    <!-- Scanning indicator -->
+    <div class="scanning" id="scanningBox">
+      <div class="scan-dot"></div>
+      <span>Listening for audio files…</span>
+      <button class="btn-scan" id="rescanBtn" title="Re-scan page now">↺ Refresh</button>
+    </div>
+
+    <!-- Combine bar (shown when ≥2 files captured) -->
+    <div class="combine-bar" id="combineBar" style="display:none">
+      <div class="combine-info">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <path d="M8 6H5a2 2 0 00-2 2v8a2 2 0 002 2h3M16 6h3a2 2 0 012 2v8a2 2 0 01-2 2h-3M12 3v18"
+            stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span id="combineLabel">Combine all clips into one file</span>
+      </div>
+      <div class="progress-wrap" id="progressWrap" style="display:none">
+        <div class="progress-bar" id="progressBar" style="width:0%"></div>
+        <span class="progress-text" id="progressText">0%</span>
+      </div>
+      <button class="btn-combine" id="combineBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3v13m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 18v1a2 2 0 002 2h14a2 2 0 002-2v-1" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        Combine &amp; Download
+      </button>
+    </div>
+
+    <!-- Audio file list -->
+    <div class="audio-list" id="audioList"></div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="emptyState" style="display:none">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="#c7d2fe" stroke-width="1.5"/>
+        <path d="M9 10l6 4-6 4V10z" fill="#c7d2fe"/>
+      </svg>
+      <p>No audio files captured yet.<br/>
+        Click <strong>Start Auto-Download</strong> above,<br/>
+        or manually click <strong>"Read to me"</strong> on the page.
+      </p>
+    </div>
+
+    <!-- Footer controls -->
+    <div class="footer-row">
+      <button class="btn-clear" id="clearBtn">Clear list</button>
+      <span class="count-label" id="countLabel">0 clips found</span>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
