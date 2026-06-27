@@ -407,6 +407,15 @@ async function combineAllClips() {
     setProgress(100, '✓ Done!');
     combineBtn.textContent = '✓ Saved!';
     combineBtn.style.background = 'linear-gradient(135deg,#047857,#059669)';
+    
+    // Trigger notification
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'icons/icon48.png',
+      title: 'Combine Complete',
+      message: `Successfully combined ${total} audio clips into ${filename}.`
+    });
+
     setTimeout(() => {
       progressWrap.style.display = 'none';
       combineBtn.disabled = false;

@@ -112,6 +112,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       pages:   msg.pages,
       captured: count,
     }).catch(() => {});
+    
+    if (msg.status === 'done') {
+      chrome.notifications.create({
+        type: 'basic',
+        iconUrl: 'icons/icon48.png',
+        title: 'Scan Complete',
+        message: `Finished scanning ${msg.pages || msg.page} pages. Captured ${count} audio clips.`
+      });
+    }
+
     sendResponse({ ok: true });
     return true;
   }
